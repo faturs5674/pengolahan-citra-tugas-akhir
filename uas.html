@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pengolahan citra</title>
+
+</head>
+<body style="background-image:url(4.png);">
+	<div>
+		<h1 style="text-align: center">	PROJECT PENGOLAHAN CITRA</h1>
+	</div>
+	<div style="margin:0px;margin-right: 700px;margin-left: 700px;background-color: orange;border:5px solid black;text-align: center;box-shadow: 0px 0px 150px black">
+       <form id="myForm" action="" method="get">
+            <!--'preview' di bawah ini adalah id element img-->
+            <input type="file" accept="image/*"  onchange="tampilkanPreview(this,'preview')" />
+            
+            <img id="preview" src="" alt="" width="450px"/>
+<div style="margin:10px;background-color: orange;border:3px solid black;text-align: center;position: static; ">
+<label>Saturate</label>
+<!--fungsi onchange berfungsi untuk mengubah nilai value-->
+<input type="range" min="0" max="10" value="0" step="1" onchange="applyFilter()" data-filter="saturate" data-scale="" ><br>
+<label>Blur</label>
+<input type="range" min="0" max="10" value="0" step="1" onchange="applyFilter()" data-filter="blur" data-scale="px" ><br>
+<label>Brightness</label>
+<input type="range" min="0" max="200" value="100" step="1" onchange="applyFilter()" data-filter="brightness" data-scale="%" ><br>
+<label>Contrast</label>	
+<input type="range" min="0" max="200" value="100" step="1" onchange="applyFilter()" data-filter="contrast" data-scale="%" ><br>
+<label>Grayscale</label>
+<input type="range" min="0" max="100" value="0" step="1" onchange="applyFilter()" data-filter="grayscale" data-scale="%" ><br>
+<label>Hue Rotate</label>
+<input type="range" min="0" max="360" value="0" step="1" onchange="applyFilter()" data-filter="hue-rotate" data-scale="deg" ><br>
+<label>Invert</label>
+<input type="range" min="0" max="100" value="0" step="1" onchange="applyFilter()" data-filter="invert" data-scale="%" ><br>
+<label>Opacity</label>
+<input type="range" min="0" max="100" value="100" step="1" onchange="applyFilter()" data-filter="opacity" data-scale="%" ><br>
+<label>Sepia</label>
+<input type="range" min="0" max="100" value="0" step="1" onchange="applyFilter()" data-filter="sepia" data-scale="%" ><br>
+
+<script type="text/javascript">
+	var image=document.querySelector('img');
+	var filterControl = document.querySelectorAll('input[type=range]');
+	function applyFilter(){
+var	computedFilter='';
+filterControl.forEach(function(item, index){
+	computedFilter += item.getAttribute('data-filter') + '('+item.value+item.getAttribute(		'data-scale')+')';
+});
+image.style.filter=computedFilter;
+
+
+	};
+	            function tampilkanPreview(gambar,idpreview){
+//                membuat objek gambar
+                var gb = gambar.files;
+//                loop untuk merender gambar
+                for (var i = 0; i < gb.length; i++){
+//                    bikin variabel
+                    var gbPreview = gb[i];
+                    var imageType = /image.*/;
+                    var preview=document.getElementById(idpreview);
+                    var reader = new FileReader();
+                    if (gbPreview.type.match(imageType)) {
+//                        jika tipe data sesuai
+                        preview.file = gbPreview;
+                        reader.onload = (function(element) {
+                            return function(e) {
+                                element.src = e.target.result;
+                            };
+                        })(preview);
+    //                    membaca data URL gambar
+                        reader.readAsDataURL(gbPreview);
+                    }else{
+//                        jika tipe data tidak sesuai
+                        alert("Type file tidak sesuai. Khusus image.");
+                    }
+                }
+            }
+
+</script>
+</dir>
+
+        </form>
+    </div>
+<footer>KELOMPOK FATURRAHMAN(1855201018),ASNA ANDI AULADI(1855201032)</footer>
+
+</body>
+</html>
